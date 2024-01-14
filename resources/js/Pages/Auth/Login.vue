@@ -19,7 +19,7 @@
                 <button class="btn-primary w-full" type="submit">Login</button>
             </div>
             <div class="mt-3">
-                <span>Don't have account? <Link :href="route('register')" class="underline">Register</Link></span>
+                <p>Don't have account? <Link :href="route('register')" class="underline">Register</Link> or <Link :href="route('listing.index')" class="underline">login as a guest</Link></p>
             </div>
         </div>
     </form>

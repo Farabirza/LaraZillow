@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\GenerateUuid;
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,9 +12,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, GenerateUuid;
 
     /**
      * The attributes that are mass assignable.
@@ -51,5 +53,14 @@ class User extends Authenticatable
             get: fn ($value) => $value,
             set: fn ($value) => Hash::make($value),
         );
+    }
+
+    public function listing()
+    {
+        return $this->hasMany(Listing::class);
+    }
+    public function offer()
+    {
+        return $this->hasMany(Offer::class);
     }
 }

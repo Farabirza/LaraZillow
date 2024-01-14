@@ -6,18 +6,18 @@
                 <div class="text-xs text-gray-500"><Price :price="monthlyPayment" /> pm</div>
             </div>
             <ListingSpace :listing="listing" class="text-lg" />
-            <ListingAdress :listing="listing" class="text-gray-500" />
+            <ListingAddress :listing="listing" class="text-gray-500" />
         </Link>
-        <div class="flex gap-3">
-            <Link :href="route('listing.edit', listing.id)">Edit</Link>
-            <Link :href="`/listing/${listing.id}`" method="delete" as="button">Delete</Link>
+        <div v-if="user && listing.user_id == user.id" class="flex mt-2">
+            <div class="px-3 py-1 border text-xs text-gray-500 border-gray-300 dark:border-gray-700 rounded-md"><span>My listing</span></div>
         </div>
     </Box>
 </template>
 
 <script setup>
-import {Link} from '@inertiajs/vue3'
-import ListingAdress from '@/Components/ListingAdress.vue'
+import {Link, usePage} from '@inertiajs/vue3'
+import { computed } from 'vue'
+import ListingAddress from '@/Components/ListingAddress.vue'
 import ListingSpace from '@/Components/ListingSpace.vue'
 import Price from '@/Components/Price.vue'
 import Box from '@/Components/UI/Box.vue'
@@ -28,4 +28,6 @@ const { monthlyPayment } = useMonthlyPayment(
     props.listing.price, 2.5, 25
 );
 
+const page = usePage();
+const user = computed(() => page.props.user);
 </script>

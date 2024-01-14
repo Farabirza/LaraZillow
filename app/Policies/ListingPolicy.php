@@ -5,23 +5,36 @@ namespace App\Policies;
 use App\Models\Listing;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ListingPolicy
 {
+    use HandlesAuthorization;
+
+    public function before(?User $user, $ability)
+    {
+        // if($user?->isAdmin) { // for php v8
+        if($user && $user->isAdmin) {
+            return true;
+        }
+    }
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
-        //
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Listing $listing): bool
+    public function view(?User $user, Listing $listing): bool
     {
-        //
+        if($listing->user_id === $user?->id) {
+            return true;
+        }
+        return $listing->sold_at === null;
     }
 
     /**
@@ -29,7 +42,12 @@ class ListingPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
+    }
+
+    public function edit(User $user, Listing $listing): bool
+    {
+        return $user->id === $listing->user_id;
     }
 
     /**
@@ -37,7 +55,7 @@ class ListingPolicy
      */
     public function update(User $user, Listing $listing): bool
     {
-        //
+        return $listing->sold_at === null && ($user->id === $listing->user_id);
     }
 
     /**
@@ -45,7 +63,7 @@ class ListingPolicy
      */
     public function delete(User $user, Listing $listing): bool
     {
-        //
+        return $user->id === $listing->user_id;
     }
 
     /**
@@ -53,7 +71,7 @@ class ListingPolicy
      */
     public function restore(User $user, Listing $listing): bool
     {
-        //
+        return $user->id === $listing->user_id;
     }
 
     /**
@@ -61,6 +79,6 @@ class ListingPolicy
      */
     public function forceDelete(User $user, Listing $listing): bool
     {
-        //
+        return $user->id === $listing->user_id;
     }
 }

@@ -21,6 +21,8 @@ return new class extends Migration
             $table->tinyText('street');
             $table->tinyText('street_nr');
             $table->unsignedMediumInteger('price');
+            $table->timestamp('sold_at')->nullable();
+            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

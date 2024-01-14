@@ -15,7 +15,28 @@
     .input-range {
         @apply w-full h-4 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700
     }
+    .input-filter-l {
+        @apply placeholder:text-gray-400 dark:placeholder:text-gray-600 border border-gray-200 dark:border-gray-700 rounded-t-md rounded-l-md rounded-b-md rounded-r-none text-sm font-medium text-gray-600 dark:text-gray-400 dark:bg-gray-800
+    }
+    .input-filter-r {
+        @apply placeholder:text-gray-400 dark:placeholder:text-gray-600 border border-l-0 border-gray-200 dark:border-gray-700 rounded-t-md rounded-l-none rounded-b-none rounded-r-md text-sm font-medium text-gray-600 dark:text-gray-400 dark:bg-gray-800
+    }
     .btn-primary {
         @apply text-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium p-2 rounded-md
+    }
+    .btn-success {
+        @apply text-lg bg-green-600 hover:bg-green-500 text-white font-medium p-2 rounded-md
+    }
+    .btn-danger {
+        @apply text-lg bg-red-600 hover:bg-red-500 text-white font-medium p-2 rounded-md
+    }
+    .btn-normal {
+        @apply text-lg bg-gray-600 hover:bg-gray-500 text-white font-medium p-2 rounded-md
+    }
+    .btn-outline {
+        @apply p-2 rounded-md border shadow-sm border-gray-300 dark:border-gray-800 hover:border-gray-400 hover:bg-gray-50 dark:hover:border-gray-700 dark:hover:bg-gray-800
+    }
+    .btn-outline-success {
+        @apply p-2 rounded-md border shadow-sm hover:text-white border-green-300 dark:border-green-800 hover:border-green-500 hover:bg-green-500 dark:hover:border-green-700 dark:hover:bg-green-700
     }
 }
