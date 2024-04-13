@@ -32,6 +32,7 @@ class StoreUserController extends FormRequest
         return [
             'name.required' => 'Name is required',
             'email.required' => 'Email is required',
+            'email.email' => 'Please insert standard email format',
             'password.required' => 'Password is required',
             'password.confirmed' => "Password confirmation doesn't match",
         ];

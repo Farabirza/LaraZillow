@@ -44,10 +44,9 @@ class ListingImageController extends Controller
             //     'images.*.mimes' => "The files should be either jpg, jpeg, or png",
             //     'images.*.max' => "The maximum file size allowed is 3 MB",
             // ]);
-            dd($request->file('images'));
-            foreach($request->file('images') as $file) {
+            foreach($request->file('images') as $key => $file) {
                 // $path = $file->store('images');
-                $fileName = time().'-'.Auth::user()->name.'.'.$file->getClientOriginalExtension();
+                $fileName = time().'-'.Auth::user()->name.'-'.$key.'.'.$file->getClientOriginalExtension();
                 $path = $file->move(public_path('images/realtor'), $fileName);
 
                 $listing->images()->save(new ListingImage([
